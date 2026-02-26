@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./server.js" type="module"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>CRUD de Pedidos</h1>
+    <section class="form-section">
+      <h2>Crear Pedido</h2>
+      <form id="pedidoForm">
+        <label>Nombre del Cliente:</label>
+        <input type="text" id="cliente_nombre" required placeholder="Antonio"/>
+        <label>Email del Cliente:</label>
+        <input type="email" id="cliente_email" required placeholder="antonio@example.com"/>
+        <label>Fecha del Pedido:</label>
+        <input type="date" id="fecha_pedido" required placeholder="2024-01-01"/>
+        <button type="submit">Crear Pedido</button>
+      </form>
+    </section>
+    <section class="list-section">
+      <h2>Lista de Pedidos</h2>
+      <button id="btnCargar">Cargar Pedidos</button>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Pedido</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaPedidos"></tbody>
+      </table>
+    </section>
+    <script src="main.js"></script>
+  </body>
+</html>

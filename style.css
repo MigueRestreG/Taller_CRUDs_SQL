@@ -1,0 +1,176 @@
+/* ====== PALETA DE COLORES ======
+   Azul primario: #4A90E2
+   Verde éxito:   #2ECC71
+   Rojo alerta:   #E74C3C
+   Gris fondo:    #F4F6F9
+   Gris texto:    #2C3E50
+================================= */
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: #F4F6F9;
+    margin: 0;
+    padding: 30px;
+    color: #2C3E50;
+}
+
+/* ====== TITULO PRINCIPAL ====== */
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: #34495E;
+}
+
+/* ====== CONTENEDORES ====== */
+.form-section, .list-section {
+    background: #ffffff;
+    padding: 30px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 850px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.form-section:hover, .list-section:hover {
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #2C3E50;
+    border-left: 5px solid #4A90E2;
+    padding-left: 10px;
+}
+
+/* ====== FORMULARIO ====== */
+label {
+    display: block;
+    margin-top: 18px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #D0D7DE;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.2s;
+    background: #FAFBFC;
+}
+
+input:focus {
+    border-color: #4A90E2;
+    outline: none;
+    box-shadow: 0 0 6px rgba(74,144,226,0.4);
+}
+
+/* ====== BOTONES ====== */
+button {
+    margin-top: 22px;
+    padding: 12px 20px;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: #3B7BC0;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Botón cargar */
+#btnCargar {
+    background: #2ECC71;
+}
+
+#btnCargar:hover {
+    background: #27AE60;
+}
+
+/* Botón eliminar */
+.btn-delete {
+    background: #E74C3C;
+}
+
+.btn-delete:hover {
+    background: #C0392B;
+}
+
+/* Botón editar */
+.btn-edit {
+    background: #F1C40F;
+    color: #333;
+}
+
+.btn-edit:hover {
+    background: #D4AC0D;
+}
+
+/* ====== TABLA ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: #4A90E2;
+    color: white;
+    padding: 14px;
+    font-size: 15px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #E0E6ED;
+    background: white;
+}
+
+tr:hover td {
+    background: #F8FAFC;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    td {
+        border: none;
+        padding: 8px 0;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        color: #4A90E2;
+    }
+}
