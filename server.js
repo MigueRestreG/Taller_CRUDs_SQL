@@ -1,6 +1,10 @@
 const express = require('express');
 const mysql = require('mysql2');
+const mongoose = require('mongoose'); // Para conectar con MongoDB
 const app = express();
+
+// Importar el modelo de Pedido para MongoDB
+const PedidoMongo = require('./models/Pedido');
 
 app.use(express.json());
 app.use(express.static(__dirname));
@@ -18,6 +22,22 @@ connection.connect((err) => {
         return;
     }
     console.log('Conexión a la base de datos establecida');
+});
+
+// ==================== MONGODB CONNECTION ====================
+// Reemplaza aquí tu URL de MongoDB Atlas
+const mongodbUri = 'mongodb+srv://admin:admin@cluster0.q8tfn3u.mongodb.net/MiBaseDeDatos?appName=Cluster0';
+
+// Conectar a MongoDB
+mongoose.connect(mongodbUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => {
+    console.log('✓ Conectado a MongoDB exitosamente');
+})
+.catch((err) => {
+    console.error('✗ Error al conectar a MongoDB: ', err);
 });
 
 app.post('/pedidos', (req, res) => {
@@ -114,6 +134,81 @@ app.delete('/pedidos/:id', (req, res) => {
 
         res.json({ message: "Pedido eliminado correctamente" });
     });
+});
+
+// ==================== MONGODB CRUD ROUTES ====================
+// Estos son los mismos CRUD pero usando MongoDB en lugar de MySQL
+
+// CREATE: Crear un nuevo pedido en MongoDB
+app.post('/mongo/pedidos', async (req, res) => {
+    try {
+        const { cliente_nombre, cliente_email, fecha_pedido } = req.body;
+
+        // Crear un nuevo documento Pedido
+        const nuevoPedido = new PedidoMongo({
+            cliente_nombre,
+            cliente_email,
+            fecha_pedido: new Date(fecha_pedido)
+        });
+
+        // Guardar en MongoDB
+        await nuevoPedido.save();
+
+        res.json({
+            message: "Pedido creado en MongoDB correctamente",
+            pedido: nuevoPedido
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// READ: Obtener todos los pedidos de MongoDB
+app.get('/mongo/pedidos', async (req, res) => {
+    try {
+        // Buscar todos los pedidos en MongoDB
+        const pedidos = await PedidoMongo.find();
+        res.json(pedidos);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// UPDATE: Actualizar un pedido en MongoDB
+app.put('/mongo/pedidos/:id', async (req, res) => {
+    try {
+        const { cliente_nombre, cliente_email, fecha_pedido } = req.body;
+
+        // Buscar y actualizar el pedido por su ID
+        const pedidoActualizado = await PedidoMongo.findByIdAndUpdate(
+            req.params.id,
+            {
+                cliente_nombre,
+                cliente_email,
+                fecha_pedido: new Date(fecha_pedido)
+            },
+            { new: true } // Devolver el documento actualizado
+        );
+
+        res.json({
+            message: "Pedido actualizado en MongoDB correctamente",
+            pedido: pedidoActualizado
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// DELETE: Eliminar un pedido de MongoDB
+app.delete('/mongo/pedidos/:id', async (req, res) => {
+    try {
+        // Buscar y eliminar el pedido por su ID
+        await PedidoMongo.findByIdAndDelete(req.params.id);
+
+        res.json({ message: "Pedido eliminado de MongoDB correctamente" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 app.listen(3000, () => {

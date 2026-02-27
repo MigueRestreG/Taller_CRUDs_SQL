@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="./server.js" type="module"></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -35,6 +34,38 @@
           </tr>
         </thead>
         <tbody id="tablaPedidos"></tbody>
+      </table>
+    </section>
+    <!-- ==================== MONGODB CRUD SECTION ==================== -->
+    <h1>
+      CRUD de Pedidos - MongoDB (NoSQL)
+    </h1>
+    <section class="form-section">
+      <h2>Crear Pedido (MongoDB)</h2>
+      <form id="pedidoFormMongo">
+        <label>Nombre del Cliente:</label>
+        <input type="text" id="cliente_nombre_mongo" required placeholder="María"/>
+        <label>Email del Cliente:</label>
+        <input type="email" id="cliente_email_mongo" required placeholder="maria@example.com"/>
+        <label>Fecha del Pedido:</label>
+        <input type="date" id="fecha_pedido_mongo" required placeholder="2024-01-01"/>
+        <button type="submit">Crear Pedido en MongoDB</button>
+      </form>
+    </section>
+    <section class="list-section">
+      <h2>Lista de Pedidos (MongoDB)</h2>
+      <button id="btnCargarMongo">Cargar Pedidos de MongoDB</button>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Pedido</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaPedidosMongo"></tbody>
       </table>
     </section>
     <script src="main.js"></script>
